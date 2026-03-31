@@ -95,6 +95,8 @@ Absolute makes the element is placed according to the closest ancestor or fellow
 
 - Guided Question: Why does the notice appear on top of the content? What happens if you swap the z‑index values?
 
+The z-index values dictate the layering of the elements. If you were to relate it to Canva, this would be like sending photos or texts to the back/front of the layer. The higher the z index, the more sent back it is, lower priority.
+
 - Challenge: 
     * What changes that you have to do on the code that will position .notice box on the top right corner of the .content box? Please write the code on paper as well (both html and css on the part of .notice and .content).
     * Try to change the position of .content to relative then to fixed. What do you observed each time?
@@ -103,6 +105,7 @@ Absolute makes the element is placed according to the closest ancestor or fellow
 3. Please answer the following reflection questions (15 minutes)
 
     a. Could you summarize the differences between the CSS position values (static, relative, absolute, fixed)? 
+
 
     b. How does absolute positioning depend on its parent element?
 
