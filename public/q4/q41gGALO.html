@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>4th 1st Graded Task </title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <body>
+    <form id="MovieForm" >
+        <label for = "Movie Title">Title:</label>
+        <br>
+        <input type="text" id="Movie Title" name="Movie Title">
+        <br> <br>
+        <label for="Year">Year:</label>
+        <br>
+        <input type="text" id="Year" name="Year">
+        <br> <br>
+        <label for="Genre">Genre:</label>
+        <br>
+        <select id="Genre" name="Genre">
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Fantasy">Horror</option>
+            <option value="Horror">Sci-fi</option>
+            <option value="Crime">Crime</option>
+            <option value ="Drama">Drama</option>
+            <option value ="Romance">Romance</option>
+            <option value ="Musical">Musical</option>
+            <option value ="Animated">Animated</option>
+        </select>
+        <br> <br>
+        <label for="Rating">Rating:</label>
+        <br>
+        <div class="StarRating">
+        <input type="radio" name="star"  value="1" id="star1">
+        <label for="star1">★</label>
+        <input type="radio" name="star"  value="2" id="star2">
+        <label for="star2">★</label>
+        <input type="radio" name="star"  value="3" id="star3">
+        <label for="star3">★</label>
+        <input type="radio" name="star"  value="4" id="star4">
+        <label for="star4">★</label>
+        <input type="radio" name="star"  value="5" id="star5">
+        <label for="star5">★</label>
+        </div>
+        <button type="submit" onclick="SaveRating()">Add Movie</button>
+
+
+        
+
+    </form>
+  </body>
+  <style>
+    
+
+    .StarRating {
+        display: flex;
+        direction: rtl;
+        font-size: 3rem;
+        justify-content: center;
+    }
+    .StarRating input{
+        display: none;
+    }
+    .StarRating label{
+        color:#ccc;
+        transition: color 0.2s;
+    }
+
+    
+    .StarRating input:checked ~ label { 
+        color: gold;
+    }
+
+    button{
+        background-color: blueviolet;
+        color:white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 80%;
+    }
+    ul{
+        list-style-type: none;
+        padding: 0;
+       
+    }
+
+    .movie-list{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        
+    }
+    
+    button.delete-btn{
+        background-color: red;
+        color: white;
+        border: none;
+        
+    }
+
+</style>
+
+    
+  </style>
+  <script>
+    function SaveRating() {
+         const Movies = {
+            Title: document.getElementById('Movie Title').value,
+            Year: document.getElementById('Year').value,
+            Genre: document.getElementById('Genre').value,
+        }
+    localStorage.setItem(Movies
+        }
+  </script>
