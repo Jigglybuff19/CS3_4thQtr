@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Rating Website</title>
+
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            background: rgb(9, 9, 155);
+            color: white;
+        }
+
+        input, select, button {
+            padding: 5px;
+            margin: 5px;
+        }
+
+        .movie {
+            border: 1px solid #444;
+            padding: 5px;
+            margin: 5px auto; 
+            display: block;    
+            border-radius: 5px;
+            width: 300px;       
+}
+
+        
+        .stars span {
+            font-size: 50px;
+            cursor: pointer;
+            color: gray;
+        }
+
+    
+        .stars span.active {
+            color: gold;
+        }
+
+        .stars span:hover {
+            color: gold;
+        }
+        button{
+            color: white;
+            background-color: purple;
+            font-family: 'Times New Roman', Times, serif;
+            padding: 10px 20px;
+            font-size: 20px;
+        }
+        input,select {
+            background-color: aquamarine;
+        }
+        #selectedRating {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Movie Ratings</h1>
+<input type="text" id="Title" placeholder="Movie Title">
+<br><br>
+
+<select id="Genre">
+    <option value="">Select Genre</option>
+    <option>Action</option>
+    <option>Comedy</option>
+    <option>Fantasy</option>
+    <option>Horror</option>
+    <option>Crime</option>
+    <option>Drama</option>
+    <option>Romance</option>
+    <option>Musical</option>
+    <option>Animated</option>
+</select>
+<br><br>
+
+<input type="number" id="Year" placeholder="Year">
+
+
+<div class="stars" id="starInput">
+    <span onclick="setRating(1)">★</span>
+    <span onclick="setRating(2)">★</span>
+    <span onclick="setRating(3)">★</span>
+    <span onclick="setRating(4)">★</span>
+    <span onclick="setRating(5)">★</span>
+</div>
+
+
+<p id="selectedRating">Selected Rating: 0</p>
+
+<br>
+<button onclick="addMovie()">Add Movie</button>
+
+<div id="movieList"></div>
+
+<script>
+let movies = JSON.parse(localStorage.getItem("movies")) || [];
+let currentRating = 0;
+
+
+function setRating(value) {
+    currentRating = value;
+    document.getElementById("selectedRating").innerText = "Selected Rating: " + value;
+
+    let stars = document.querySelectorAll("#starInput span");
+
+    stars.forEach((star, index) => {
+        if (index < value) {
+            star.classList.add("active");
+        } else {
+            star.classList.remove("active");
+        }
+    });
+}
+
+function saveMovies() {
+    localStorage.setItem("movies", JSON.stringify(movies));
+}
+
+function renderMovies() {
+    let container = document.getElementById("movieList");
+    container.innerHTML = "";
+
+    movies.forEach(movie => {
+        let div = document.createElement("div");
+        div.className = "movie";
+
+        div.innerHTML = `
+            <h2>${movie.title}(${movie.year})-${movie.genre}, Rating:${"⭐".repeat(movie.rating)}${"☆".repeat(5 - movie.rating)} 
+        `;
+
+        container.appendChild(div);
+    });
+}
+function addMovie() {
+    let title = document.getElementById("Title").value.trim();
+    let genre = document.getElementById("Genre").value;
+    let year = document.getElementById("Year").value.trim();
+
+    if (title === "" || genre === "" || year === "" || currentRating === 0) {
+        alert("Answer everything I beg of you!");
+        return;
+    }
+
+    movies.push({
+        title: title,
+        genre: genre,
+        year: year,
+        rating: currentRating
+    });
+
+    
+    document.getElementById("Title").value = "";
+    document.getElementById("Genre").value = "";
+    document.getElementById("Year").value = "";
+    currentRating = 0;
+    document.getElementById("selectedRating").innerText = "Selected Rating: 0";
+
+    let stars = document.querySelectorAll("#starInput span");
+    stars.forEach(star => star.classList.remove("active"));
+
+    saveMovies();
+    renderMovies();
+}
+
+renderMovies();
+</script>
+
+</body>
+</html>
